@@ -1,0 +1,70 @@
+#!/bin/sh
+function usage
+{
+echo -e "
+Usage: $0 -t <Email Recipients> [-f <Email Sender>] [-a \"<Email Attachments>\"] [-s \"<Email Subject>\"] [-b \"<Email Body>\"] [-bf]
+       $0 -t kowalczjm@herkimer.edu,ayouchka@herkimer.edu -f jobs@herkimer.edu -a \"some_data.lis some_data.csv\" -s \"My Message Subject\" -b \"My Message Body\" -bf
+
+Arguments:
+         -t | --to\t\tEmail To
+         -f | --from\t\tEmail From
+         -a | --attach\t\tEmail Attachment Filename(s)
+         -s | --subject\t\tEmail Subject
+         -b | --body\t\tEmail Message Body
+         -bf | --bodyfile\tIndicates the Email Body is the contents of a file
+"
+}
+
+BODYFILE=0
+## Pick up command line arguments
+while [ "$1" != "" ]; do
+   case $1 in
+      -t | --to )       shift
+                        EMAILTO=$1; export EMAILTO
+                        ;;
+      -f | --from )     shift
+                        EMAILFROM=$1; export EMAILFROM
+                        ;;
+      -a | --attach )   shift
+                        ATTACH=$1; export ATTACH
+                        ;;
+      -s | --subject )  shift
+                        EMAILSUBJECT=$1; export EMAILSUBJECT
+                        ;;
+      -b | --body )     shift
+                        EMAILBODY=$1; export EMAILBODY
+                        ;;
+      -bf | --bodyfile ) BODYFILE=1; export BODYFILE
+                        ;;
+      -h | --help )     usage
+                        exit
+                        ;;
+      * )               echo -e "Unrecognized Parameter Specified: $1"
+                        usage
+                        exit 1
+                        ;;
+   esac
+   shift
+done
+
+## Make sure required variables have been filled.
+if [ -z $EMAILTO ]; then
+   echo "You are missing a required variable."
+   usage
+   exit
+fi
+
+if [ -n "$EMAILFROM" ]; then
+   EMAILFROMSTR=" -r $EMAILFROM"
+fi
+
+if [ "$BODYFILE" -eq 1 ]; then
+   EMAILBODY=`cat $EMAILBODY`
+fi
+
+if [ -n "$ATTACH" ]; then
+   (for i in $ATTACH; do uuencode $i $(basename $i); done; echo "$EMAILBODY") | mailx -s "$EMAILSUBJECT" $EMAILFROMSTR "$EMAILTO"
+else
+   echo "$EMAILBODY" | mailx -s "$EMAILSUBJECT" $EMAILFROMSTR "$EMAILTO"
+fi
+
