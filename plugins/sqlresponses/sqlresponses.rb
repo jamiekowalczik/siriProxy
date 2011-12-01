@@ -79,20 +79,19 @@ MESSAGE_END
 	####
 	# When the server reports an "unkown command", this gets called. It's useful for implementing commands that aren't otherwise covered
 	def unknown_command(object, connection, phrase)
-                response = doDBResponses(phrase)
-		puts "test - #{phrase}"
-                if response != nil
-                	self.plugin_manager.block_rest_of_session_from_server
-                        return generate_siri_utterance(connection.lastRefId, response)
-                end
 		object
 	end
 	
 	####
 	# This is called whenever the server recognizes speech. It's useful for overriding commands that Siri would otherwise recognize
 	def speech_recognized(object, connection, phrase)
-		puts "testt - #{phrase}"
-		object
+		response = doDBResponses(phrase)
+                puts "test - #{phrase}"
+                if response != nil
+                        self.plugin_manager.block_rest_of_session_from_server
+                        return generate_siri_utterance(connection.lastRefId, response)
+                end
+                object
 	end
 	
 end 
