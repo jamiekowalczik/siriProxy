@@ -137,7 +137,7 @@ class SQLRespones < SiriPlugin
 MESSAGE_END
 
 		Net::SMTP.start('localhost') do |smtp|
-  			smtp.send_message message, '#{sentFrom}'
+  			smtp.send_message message, '#{sendTo}'
 		end
 	end
 
