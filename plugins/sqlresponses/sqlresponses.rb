@@ -63,7 +63,7 @@ class SQLRespones < SiriPlugin
 	end
 	
 	def getDBData1(sql)
-                dbh = Mysql.real_connect("localhost", "root", "hccc12pass", "shopping_lists")
+                dbh = Mysql.real_connect("localhost", "root", "rootpass", "shopping_lists")
                 query = sql
                 res = dbh.query(query)
                 return res
