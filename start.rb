@@ -4,7 +4,7 @@ $KCODE='u' #setting KCODE to unicode for Ruby 1.8
 
 require 'plugins/testproxy/testproxy'
 require 'plugins/schedule/siriSchedule'
-require 'plugins/schedule/sqlresponses'
+require 'plugins/sqlresponses/sqlresponses'
 # require 'plugins/thermostat/siriThermostat'
 # require 'plugins/eliza/eliza'
 # require 'plugins/twitter/siriTweet'
