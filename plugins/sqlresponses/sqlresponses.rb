@@ -10,7 +10,7 @@ require 'net/smtp'
 ######
 
 
-class SQLRespones < SiriPlugin
+class SQLResponses < SiriPlugin
 
 	####
 	# This gets called every time an object is received from the Guzzoni server
