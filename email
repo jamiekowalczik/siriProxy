@@ -56,6 +56,9 @@ fi
 
 if [ -n "$EMAILFROM" ]; then
    EMAILFROMSTR=" -r $EMAILFROM"
+   # For OEL 5
+   # Move variable from before to after $EMAILTO variable
+   #EMAILFROMSTR=" -- -f $EMAILFROM"
 fi
 
 if [ "$BODYFILE" -eq 1 ]; then
