@@ -91,6 +91,7 @@ MESSAGE_END
 	####
 	# This is called whenever the server recognizes speech. It's useful for overriding commands that Siri would otherwise recognize
 	def speech_recognized(object, connection, phrase)
+		puts "testt - #{phrase}"
 		object
 	end
 	
