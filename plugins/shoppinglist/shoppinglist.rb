@@ -25,7 +25,7 @@ class ShoppingList < SiriPlugin
 	end
 	
 	def getDBData(sql)
-                dbh = Mysql.real_connect("localhost", "root", "rootpass", "shopping_lists")
+                dbh = Mysql.real_connect("localhost", "root", "password", "shopping_lists")
                 query = sql
                 res = dbh.query(query)
                 return res
