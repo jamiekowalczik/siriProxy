@@ -3,7 +3,7 @@ function usage
 {
 echo -e "
 Usage: $0 -t <Email Recipients> [-f <Email Sender>] [-a \"<Email Attachments>\"] [-s \"<Email Subject>\"] [-b \"<Email Body>\"] [-bf]
-       $0 -t kowalczjm@herkimer.edu,ayouchka@herkimer.edu -f jobs@herkimer.edu -a \"some_data.lis some_data.csv\" -s \"My Message Subject\" -b \"My Message Body\" -bf
+       $0 -t someemail@here.com -f jobs@here.com -a \"some_data.lis some_data.csv\" -s \"My Message Subject\" -b \"My Message Body\" -bf
 
 Arguments:
          -t | --to\t\tEmail To
