@@ -18,7 +18,7 @@ class SiriSchedule < SiriPlugin
 	end	
 	def updateSchedule(day, startTime, endTime, connection)
 		self.plugin_manager.block_rest_of_session_from_server
-		dbh = Mysql.real_connect("localhost", "root", "hccc12pass", "schedules")
+		dbh = Mysql.real_connect("localhost", "root", "password", "schedules")
 		entryDate = Date.today.to_s
 		dconv = Date.strptime(entryDate, "%Y-%m-%d")
                 dow = dconv.strftime('%A')
@@ -35,7 +35,7 @@ class SiriSchedule < SiriPlugin
 	
 	def readSchedule(day, connection)
 		self.plugin_manager.block_rest_of_session_from_server
-		 dbh = Mysql.real_connect("localhost", "root", "hccc12pass", "schedules")
+		 dbh = Mysql.real_connect("localhost", "root", "password", "schedules")
 		 squery = "SELECT * FROM schedules WHERE day = '" + day + "'"
 		 nquery = "SELECT * FROM schedules WHERE day = 'Next " + day + "'"
 		 #puts squery
